@@ -64,20 +64,21 @@
 			<version>${org.apache.felix.bundlerepository.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.felix</groupId>
-			<artifactId>org.osgi.core</artifactId>
-			<version>${org.apache.felix.org.osgi.core.version}</version>
+			<groupId>org.osgi</groupId>
+			<artifactId>osgi.core</artifactId>
+			<version>${org.osgi.core.version}</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.felix</groupId>
 			<artifactId>org.osgi.service.obr</artifactId>
 			<version>${org.apache.felix.org.osgi.service.obr.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.maven</groupId>
-			<artifactId>maven-project</artifactId>
-			<version>${org.apache.maven.project.version}</version>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.apache.maven</groupId>-->
+<!--			<artifactId>maven-project</artifactId>-->
+<!--			<version>${org.apache.maven.project.version}</version>-->
+<!--		</dependency>-->
 		<dependency>
 			<groupId>org.apache.maven</groupId>
 			<artifactId>maven-model</artifactId>

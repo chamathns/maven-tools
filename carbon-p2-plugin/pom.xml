@@ -64,11 +64,11 @@
             <artifactId>maven-compat</artifactId>
             <version>${org.apache.maven.compat.version}</version>
         </dependency>
-        	<dependency>
-            		<groupId>org.apache.maven</groupId>
-            		<artifactId>maven-project</artifactId>
-			<version>${org.apache.maven.project.version}</version>
-        	</dependency>
+<!--        	<dependency>-->
+<!--            		<groupId>org.apache.maven</groupId>-->
+<!--            		<artifactId>maven-project</artifactId>-->
+<!--			<version>${org.apache.maven.project.version}</version>-->
+<!--        	</dependency>-->
         	<dependency>
             		<groupId>junit</groupId>
             		<artifactId>junit</artifactId>
@@ -79,27 +79,52 @@
 
     <build>
         <plugins>
-            <plugin> 
-		<groupId>org.jvnet.maven.incrementalbuild</groupId> 
-		<artifactId>incremental-build-plugin</artifactId>
-		<version>1.3</version>
-		<executions> 
-		    <execution> 
-		        <goals> 
-			    <goal>incremental-build</goal>
-			</goals>
-		    </execution> 
-		</executions> 
-	    </plugin>
-
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugin-testing</groupId>-->
+<!--                <artifactId>maven-plugin-testing-harness</artifactId>-->
+<!--                <version>3.3.0</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>validate</id>-->
+<!--                        <goals>-->
+<!--                            <goal>validate</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
+            <groupId>org.jvnet.maven.incrementalbuild</groupId>
+            <artifactId>incremental-build-plugin</artifactId>
+            <version>1.3</version>
+            <executions>
+                <execution>
+                    <goals>
+                    <goal>incremental-build</goal>
+                </goals>
+                </execution>
+            </executions>
             </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-plugin-plugin</artifactId>-->
+<!--                <version>3.7.1</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>default-addPluginArtifactMetadata</id>-->
+<!--                        <phase>package</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>addPluginArtifactMetadata</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                    <execution>-->
+<!--                        <id>default-descriptor</id>-->
+<!--                        <phase>process-classes</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>descriptor</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
            <plugin>
          <groupId>org.apache.rat</groupId>
         <artifactId>apache-rat-plugin</artifactId>
