@@ -137,7 +137,8 @@ public class ProfileGenMojo extends AbstractMojo {
      */
     private MavenProjectHelper projectHelper;
 
-    /** @component */
+    /**
+     * @component */
     private P2ApplicationLauncher launcher;
 
     /**

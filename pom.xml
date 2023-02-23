@@ -11,11 +11,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-<!--    <parent>-->
-<!--        <groupId>org.wso2</groupId>-->
-<!--        <artifactId>wso2</artifactId>-->
-<!--        <version>1.4</version>-->
-<!--    </parent>-->
+    <parent>
+        <groupId>org.wso2</groupId>
+        <artifactId>wso2</artifactId>
+        <version>1.4</version>
+    </parent>
     <groupId>org.wso2.maven</groupId>
     <artifactId>maven-common-tools</artifactId>
     <packaging>pom</packaging>
@@ -24,14 +24,44 @@
     <url>http://wso2.org</url>
     <repositories>
         <repository>
-            <id>wso2-nexus</id>
-            <name>WSO2 internal Repository</name>
-            <url>http://maven.wso2.org/nexus/content/groups/wso2-public/</url>
             <releases>
                 <enabled>true</enabled>
                 <updatePolicy>daily</updatePolicy>
                 <checksumPolicy>ignore</checksumPolicy>
             </releases>
+            <id>wso2-nexus</id>
+            <name>WSO2 internal Repository</name>
+            <url>https://maven.wso2.org/nexus/content/groups/wso2-public/</url>
+        </repository>
+        <repository>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+                <checksumPolicy>ignore</checksumPolicy>
+            </releases>
+            <id>wso2.releases</id>
+            <name>WSO2 Releases Repository</name>
+            <url>https://maven.wso2.org/nexus/content/repositories/releases/</url>
+        </repository>
+        <repository>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+            </snapshots>
+            <id>wso2.snapshots</id>
+            <name>WSO2 Snapshot Repository</name>
+            <url>https://maven.wso2.org/nexus/content/repositories/snapshots/</url>
+        </repository>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>central</id>
+            <name>Central Repository</name>
+            <url>https://repo.maven.apache.org/maven2</url>
         </repository>
     </repositories>
     <distributionManagement>
@@ -89,6 +119,11 @@
         <module>maven-dataservice-plugin</module>
     </modules>
     <build>
+        <sourceDirectory>/Users/chamaths/IS/repositories/public/maven-tools/carbon-p2-plugin/src/main/java</sourceDirectory>
+        <scriptSourceDirectory>/Users/chamaths/IS/repositories/public/maven-tools/carbon-p2-plugin/src/main/scripts</scriptSourceDirectory>
+        <testSourceDirectory>/Users/chamaths/IS/repositories/public/maven-tools/carbon-p2-plugin/src/test/java</testSourceDirectory>
+        <outputDirectory>/Users/chamaths/IS/repositories/public/maven-tools/carbon-p2-plugin/target/classes</outputDirectory>
+        <testOutputDirectory>/Users/chamaths/IS/repositories/public/maven-tools/carbon-p2-plugin/target/test-classes</testOutputDirectory>
         <extensions>
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
@@ -96,275 +131,714 @@
                 <version>1.0-beta-6</version>
             </extension>
         </extensions>
+        <resources>
+            <resource>
+                <directory>/Users/chamaths/IS/repositories/public/maven-tools/carbon-p2-plugin/src/main/resources</directory>
+            </resource>
+        </resources>
+        <testResources>
+            <testResource>
+                <directory>/Users/chamaths/IS/repositories/public/maven-tools/carbon-p2-plugin/src/test/resources</directory>
+            </testResource>
+        </testResources>
+        <directory>/Users/chamaths/IS/repositories/public/maven-tools/carbon-p2-plugin/target</directory>
+        <finalName>carbon-p2-plugin-5.2.43-SNAPSHOT</finalName>
         <pluginManagement>
             <plugins>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-release-plugin</artifactId>
-                    <configuration>
-                        <preparationGoals>clean install</preparationGoals>
-                    </configuration>
+                    <artifactId>maven-antrun-plugin</artifactId>
+                    <version>3.1.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>3.4.2</version>
+                </plugin>
+<!--                <plugin>-->
+<!--                    <groupId>org.apache.maven.plugins</groupId>-->
+<!--                    <artifactId>maven-clean-plugin</artifactId>-->
+<!--                    <version>3.2.0</version>-->
+<!--                </plugin>-->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>3.1.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
+                    <version>3.1.0</version>
+                </plugin>
+<!--                <plugin>-->
+<!--                    <artifactId>maven-docck-plugin</artifactId>-->
+<!--                    <version>1.1</version>-->
+<!--                </plugin>-->
+                <plugin>
+                    <groupId>org.apache.maven</groupId>
+                    <artifactId>maven-plugin-api</artifactId>
+                    <version>3.8.7</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>${maven-compiler-plugin.version}</version>
-                    <configuration>
-                        <source>11</source>
-                        <target>11</target>
-                    </configuration>
+                    <artifactId>maven-enforcer-plugin</artifactId>
+                    <version>3.2.1</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>2.22.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>3.0.1</version>
+                </plugin>
+<!--                <plugin>-->
+<!--                    <groupId>org.apache.maven.plugins</groupId>-->
+<!--                    <artifactId>maven-install-plugin</artifactId>-->
+<!--                    <version>3.1.0</version>-->
+<!--                </plugin>-->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-invoker-plugin</artifactId>
+                    <version>3.5.0</version>
+                </plugin>
+<!--                <plugin>-->
+<!--                    <groupId>org.apache.maven.plugins</groupId>-->
+<!--                    <artifactId>maven-jar-plugin</artifactId>-->
+<!--                    <version>3.3.0</version>-->
+<!--                    <configuration>-->
+<!--                        <archive>-->
+<!--                            <manifest>-->
+<!--                                <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>-->
+<!--                                <addDefaultImplementationEntries>true</addDefaultImplementationEntries>-->
+<!--                            </manifest>-->
+<!--                        </archive>-->
+<!--                    </configuration>-->
+<!--                </plugin>-->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <version>3.5.0</version>
                 </plugin>
-
 <!--                <plugin>-->
-<!--                    <groupId>org.apache.maven.plugin-testing</groupId>-->
-<!--                    <artifactId>maven-plugin-testing-harness</artifactId>-->
-<!--                    <version>3.3.0</version>-->
+<!--                    <artifactId>maven-plugin-plugin</artifactId>-->
+<!--                    <version>3.7.0</version>-->
 <!--                    <executions>-->
 <!--                        <execution>-->
-<!--                            <id>validate</id>-->
-<!--                            <goals>-->
-<!--                                <goal>validate</goal>-->
-<!--                            </goals>-->
-<!--                        </execution>-->
-<!--                    </executions>-->
-<!--                </plugin>-->
-
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-plugin-plugin</artifactId>
-                    <version>3.7.0</version>
-                    <configuration>
-                        <skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
-<!--                        <skip>true</skip>-->
-                    </configuration>
-<!--                    <executions>-->
-<!--                        <execution>-->
-<!--                            <id>mojo-descriptor</id>-->
+<!--                            <id>default-descriptor</id>-->
+<!--                            <phase>process-classes</phase>-->
 <!--                            <goals>-->
 <!--                                <goal>descriptor</goal>-->
 <!--                            </goals>-->
+<!--                            <configuration>-->
+<!--                                <skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>-->
+<!--                            </configuration>-->
+<!--                        </execution>-->
+<!--                        <execution>-->
+<!--                            <id>help-descriptor</id>-->
+<!--                            <phase>process-classes</phase>-->
+<!--                            <goals>-->
+<!--                                <goal>helpmojo</goal>-->
+<!--                            </goals>-->
+<!--                            <configuration>-->
+<!--                                <skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>-->
+<!--                            </configuration>-->
 <!--                        </execution>-->
 <!--                    </executions>-->
 <!--                    <configuration>-->
-<!--                        <goalPrefix>mysql-jdbc-compliance</goalPrefix>-->
+<!--                        <skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>-->
 <!--                    </configuration>-->
-                    <executions>
-                        <execution>
-                            <id>default-descriptor</id>
-                            <goals>
-                                <goal>descriptor</goal>
-                            </goals>
-                            <phase>process-classes</phase>
-                        </execution>
-                        <execution>
-                            <id>help-descriptor</id>
-                            <goals>
-                                <goal>helpmojo</goal>
-                            </goals>
-                            <phase>process-classes</phase>
-                        </execution>
-                    </executions>
+<!--                </plugin>-->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>3.0.0-M7</version>
+                    <configuration>
+                        <preparationGoals>clean install</preparationGoals>
+                    </configuration>
+                </plugin>
+<!--                <plugin>-->
+<!--                    <groupId>org.apache.maven.plugins</groupId>-->
+<!--                    <artifactId>maven-remote-resources-plugin</artifactId>-->
+<!--                    <version>3.0.0</version>-->
+<!--                </plugin>-->
+<!--                <plugin>-->
+<!--                    <groupId>org.apache.maven.plugins</groupId>-->
+<!--                    <artifactId>maven-resources-plugin</artifactId>-->
+<!--                    <version>3.3.0</version>-->
+<!--                </plugin>-->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-scm-plugin</artifactId>
+                    <version>1.13.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-scm-publish-plugin</artifactId>
+                    <version>3.1.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>3.12.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>3.2.1</version>
+                </plugin>
+<!--                <plugin>-->
+<!--                    <groupId>org.apache.maven.plugins</groupId>-->
+<!--                    <artifactId>maven-surefire-plugin</artifactId>-->
+<!--                    <version>2.22.2</version>-->
+<!--                </plugin>-->
+<!--                <plugin>-->
+<!--                    <groupId>org.apache.rat</groupId>-->
+<!--                    <artifactId>apache-rat-plugin</artifactId>-->
+<!--                    <version>0.15</version>-->
+<!--                </plugin>-->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>clirr-maven-plugin</artifactId>
+                    <version>2.8</version>
                 </plugin>
             </plugins>
         </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-remote-resources-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>process</goal>
+                        </goals>
+                        <configuration>
+                            <resourceBundles>
+                                <resourceBundle>org.apache:apache-jar-resource-bundle:1.4</resourceBundle>
+                            </resourceBundles>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.jvnet.maven.incrementalbuild</groupId>
+                <artifactId>incremental-build-plugin</artifactId>
+                <version>1.3</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>incremental-build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.rat</groupId>
+                <artifactId>apache-rat-plugin</artifactId>
+                <version>0.15</version>
+                <executions>
+                    <execution>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <includes>
+                                <include>src/**/*</include>
+                                <include>pom.xml</include>
+                            </includes>
+                        </configuration>
+                    </execution>
+                </executions>
+                <configuration>
+                    <includes>
+                        <include>src/**/*</include>
+                        <include>pom.xml</include>
+                    </includes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <id>default-clean</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <id>default-testResources</id>
+                        <phase>process-test-resources</phase>
+                        <goals>
+                            <goal>testResources</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>default-resources</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>resources</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <id>default-jar</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <archive>
+                                <manifest>
+                                    <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                                    <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                                </manifest>
+                            </archive>
+                        </configuration>
+                    </execution>
+                </executions>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugin-tools</groupId>
+                <artifactId>maven-plugin-tools-java</artifactId>
+                <version>3.7.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugin-tools</groupId>
+                <artifactId>maven-plugin-tools</artifactId>
+                <version>3.7.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-plugin-plugin</artifactId>
+                <version>3.7.1</version>
+                <executions>
+                    <execution>
+                        <id>default-addPluginArtifactMetadata</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>addPluginArtifactMetadata</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>default-descriptor</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>descriptor</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.10.1</version>
+                <executions>
+                    <execution>
+                        <id>default-compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                            <source>11</source>
+                            <target>11</target>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>default-testCompile</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>testCompile</goal>
+                        </goals>
+                        <configuration>
+                            <source>11</source>
+                            <target>11</target>
+                        </configuration>
+                    </execution>
+                </executions>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
+                <executions>
+                    <execution>
+                        <id>default-test</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>default-install</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>install</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>default-deploy</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>org.wso2.maven</groupId>
                 <artifactId>org.wso2.maven.utils</artifactId>
-                <version>${org.wso2.maven.utils.version}</version>
+                <version>5.2.43-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.wso2.maven</groupId>
                 <artifactId>org.wso2.maven.capp</artifactId>
-                <version>${org.wso2.maven.capp.version}</version>
+                <version>5.2.43-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.wso2.maven</groupId>
                 <artifactId>org.wso2.maven.core</artifactId>
-                <version>${org.wso2.maven.core.version}</version>
+                <version>5.2.43-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.wso2.maven</groupId>
                 <artifactId>org.wso2.maven.registry</artifactId>
-                <version>${org.wso2.maven.registry.version}</version>
+                <version>5.2.43-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.wso2.maven</groupId>
                 <artifactId>maven-synapse-plugin</artifactId>
-                <version>${org.wso2.maven.synapse.plugin.version}</version>
+                <version>5.2.43-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.google.code.gson</groupId>
                 <artifactId>gson</artifactId>
-                <version>${gson.version}</version>
+                <version>2.8.5</version>
             </dependency>
             <dependency>
                 <groupId>org.testng</groupId>
                 <artifactId>testng</artifactId>
-                <version>${testng.version}</version>
+                <version>6.11</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.apache.maven</groupId>
                 <artifactId>maven-plugin-api</artifactId>
-                <version>${org.apache.maven.plugin.api.version}</version>
+                <version>3.8.7</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.maven.plugin-tools</groupId>
                 <artifactId>maven-plugin-annotations</artifactId>
-                <version>${org.apache.maven.plugin.api.version}</version>
+                <version>3.8.1-SNAPSHOT</version>
                 <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>org.apache.ws.commons.axiom</groupId>
                 <artifactId>axiom-impl</artifactId>
-                <version>${org.apache.ws.commons.axiom.version}</version>
+                <version>1.2.20</version>
             </dependency>
             <dependency>
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
-                <version>${org.apache.commons.io.version}</version>
+                <version>2.4</version>
             </dependency>
             <dependency>
                 <groupId>com.hubspot.jinjava</groupId>
                 <artifactId>jinjava</artifactId>
-                <version>${version.jinjava}</version>
+                <version>2.4.14</version>
             </dependency>
             <dependency>
                 <groupId>net.consensys.cava</groupId>
                 <artifactId>cava-toml</artifactId>
-                <version>${version.cava-toml}</version>
+                <version>0.5.0</version>
             </dependency>
             <dependency>
                 <groupId>commons-logging</groupId>
                 <artifactId>commons-logging</artifactId>
-                <version>${common.logging.version}</version>
+                <version>1.2</version>
             </dependency>
             <dependency>
                 <groupId>commons-lang.wso2</groupId>
                 <artifactId>commons-lang</artifactId>
-                <version>${orbit.version.commons.lang}</version>
+                <version>2.6.0.wso2v1</version>
             </dependency>
             <dependency>
                 <groupId>commons-codec</groupId>
                 <artifactId>commons-codec</artifactId>
-                <version>${version.commons.codec}</version>
+                <version>1.12</version>
             </dependency>
             <dependency>
                 <groupId>net.lingala.zip4j</groupId>
                 <artifactId>zip4j</artifactId>
-                <version>${net.lingala.zip4j.version}</version>
+                <version>1.3.2</version>
             </dependency>
             <dependency>
                 <groupId>org.wso2.config.mapper</groupId>
                 <artifactId>config-mapper</artifactId>
-                <version>${mi.config.mapper.version}</version>
+                <version>1.0.7</version>
             </dependency>
             <dependency>
                 <groupId>org.wso2.ciphertool</groupId>
                 <artifactId>org.wso2.ciphertool</artifactId>
-                <version>${org.wso2.ciphertool.version}</version>
+                <version>1.1.13</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-plugin-api</artifactId>
+            <version>3.8.7</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-core</artifactId>
+            <version>3.8.7</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.tycho</groupId>
+            <artifactId>sisu-equinox-embedder</artifactId>
+            <version>${tycho.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.tycho</groupId>
+            <artifactId>sisu-equinox-launching</artifactId>
+            <version>${tycho.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.tycho</groupId>
+            <artifactId>tycho-p2-facade</artifactId>
+            <version>${tycho.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-compat</artifactId>
+            <version>3.8.7</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+                <checksumPolicy>ignore</checksumPolicy>
+            </releases>
+            <id>wso2.releases</id>
+            <name>WSO2 Releases Repository</name>
+            <url>https://maven.wso2.org/nexus/content/repositories/releases/</url>
+        </pluginRepository>
+        <pluginRepository>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+            </snapshots>
+            <id>wso2.snapshots</id>
+            <name>WSO2 Snapshot Repository</name>
+            <url>https://maven.wso2.org/nexus/content/repositories/snapshots/</url>
+        </pluginRepository>
+        <pluginRepository>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+                <checksumPolicy>ignore</checksumPolicy>
+            </releases>
+            <id>wso2-nexus</id>
+            <name>WSO2 internal Repository</name>
+            <url>https://maven.wso2.org/nexus/content/groups/wso2-public/</url>
+        </pluginRepository>
+        <pluginRepository>
+            <releases>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>central</id>
+            <name>Central Repository</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </pluginRepository>
+    </pluginRepositories>
+
     <properties>
-        <commons.logging.version>1.1.1</commons.logging.version>
+        <apache.rat.plugin.version>0.13</apache.rat.plugin.version>
+        <bndlib.version>0.0.357</bndlib.version>
+        <clirr.maven.plugin.version>2.8</clirr.maven.plugin.version>
+        <common.logging.version>1.2</common.logging.version>
         <commons.codec.wso2.commons.codec.version>1.4.0.wso2v1</commons.codec.wso2.commons.codec.version>
         <commons.httpclient.version>3.1</commons.httpclient.version>
+        <commons.io.version>2.4.0.wso2v1</commons.io.version>
+        <commons.logging.version>1.1.1</commons.logging.version>
+        <feign-form.version>3.8.0</feign-form.version>
+        <feign.version>11.0</feign.version>
+        <gson.version>2.8.5</gson.version>
+        <junit.version>3.8.1</junit.version>
+        <kxml2.version>2.2.2</kxml2.version>
+        <log4j.version>1.2.14</log4j.version>
+        <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
+        <maven.antrun.plugin.version>1.8</maven.antrun.plugin.version>
+        <maven.assembly.plugin.version>3.1.1</maven.assembly.plugin.version>
+        <maven.checkstyle.plugin.version>3.0.0</maven.checkstyle.plugin.version>
+        <maven.clean.plugin.version>3.1.0</maven.clean.plugin.version>
+        <maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <maven.dependency.plugin.version>3.1.1</maven.dependency.plugin.version>
+        <maven.deploy.plugin.version>2.8.2</maven.deploy.plugin.version>
+        <maven.docck.plugin.version>1.1</maven.docck.plugin.version>
+        <maven.enforcer.plugin.version>1.4.1</maven.enforcer.plugin.version>
+        <maven.failsafe.plugin.version>2.22.2</maven.failsafe.plugin.version>
+        <maven.gpg.plugin.version>1.6</maven.gpg.plugin.version>
+        <maven.install.plugin.version>2.5.2</maven.install.plugin.version>
+        <maven.invoker.plugin.version>3.2.0</maven.invoker.plugin.version>
+        <maven.jar.plugin.version>3.1.2</maven.jar.plugin.version>
+        <maven.javadoc.plugin.version>3.1.1</maven.javadoc.plugin.version>
+        <maven.plugin.plugin.version>3.6.0</maven.plugin.plugin.version>
+        <maven.release.plugin.version>2.5.3</maven.release.plugin.version>
+        <maven.remote.resources.plugin.version>1.6.0</maven.remote.resources.plugin.version>
+        <maven.resources.plugin.version>3.1.0</maven.resources.plugin.version>
+        <maven.scm.plugin.version>1.11.2</maven.scm.plugin.version>
+        <maven.scm.publish.plugin.version>3.0.0</maven.scm.publish.plugin.version>
+        <maven.site.plugin.version>3.7.1</maven.site.plugin.version>
+        <maven.source.plugin.version>3.1.0</maven.source.plugin.version>
+        <maven.spotbugsplugin.version>3.1.10</maven.spotbugsplugin.version>
+        <maven.surefire.plugin.version>2.22.2</maven.surefire.plugin.version>
+        <mi.config.mapper.version>1.0.7</mi.config.mapper.version>
+        <mockito.core.version>1.9.5</mockito.core.version>
         <mojo-executor.version>2.2.0</mojo-executor.version>
-        <org.apache.maven.core.version>3.8.7</org.apache.maven.core.version>
-        <org.apache.maven.compat.version>3.8.7</org.apache.maven.compat.version>
-        <org.apache.maven.project.version>2.2.1</org.apache.maven.project.version>
-        <org.apache.maven.model.version>3.0.2</org.apache.maven.model.version>
-        <org.apache.maven.artifact.version>2.0.7</org.apache.maven.artifact.version>
-        <org.apache.maven.archiver.version>3.6.0</org.apache.maven.archiver.version>
-        <org.apache.maven.artifact.manager.version>2.2.1</org.apache.maven.artifact.manager.version>
-        <org.apache.maven.settings.version>3.8.7</org.apache.maven.settings.version>
-        <org.apache.maven.dependency.tree.version>3.2.1</org.apache.maven.dependency.tree.version>
-        <org.apache.maven.plugin.testing.harness.version>3.3.0</org.apache.maven.plugin.testing.harness.version>
-        <org.apache.maven.wagon.provider.api.version>1.0-beta-2</org.apache.maven.wagon.provider.api.version>
+        <net.lingala.zip4j.version>1.3.2</net.lingala.zip4j.version>
+        <orbit.version.commons.io>2.4.0.wso2v1</orbit.version.commons.io>
+        <orbit.version.commons.lang>2.6.0.wso2v1</orbit.version.commons.lang>
         <org.apache.axis2.aar.maven.plugin.version>1.6-wso2v4</org.apache.axis2.aar.maven.plugin.version>
-        <org.apache.axis2.wsdl2code.maven.plugin.version>1.6.1-wso2v12</org.apache.axis2.wsdl2code.maven.plugin.version>
         <org.apache.axis2.client.version>1.6.1.wso2v9</org.apache.axis2.client.version>
-        <org.apache.felix.bundlerepository.version>1.6.2</org.apache.felix.bundlerepository.version>
-        <org.apache.felix.org.osgi.core.version>1.0.0</org.apache.felix.org.osgi.core.version>
-        <org.osgi.core.version>6.0.0</org.osgi.core.version>
-        <org.apache.felix.org.osgi.service.obr.version>1.0.1</org.apache.felix.org.osgi.service.obr.version>
-        <org.apache.ws.commons.axiom.wso2.axiom.version>1.2.11.wso2v4</org.apache.ws.commons.axiom.wso2.axiom.version>
+        <org.apache.axis2.wsdl2code.maven.plugin.version>1.6.1-wso2v12</org.apache.axis2.wsdl2code.maven.plugin.version>
         <org.apache.axis2.wso2.axis2.version>1.6.1.wso2v3</org.apache.axis2.wso2.axis2.version>
-        <org.apache.geronimo.specs.wso2.geronimo.stax.api_1.0_spec.version>1.0.1.wso2v1
-        </org.apache.geronimo.specs.wso2.geronimo.stax.api_1.0_spec.version>
-        <org.apache.neethi.wso2.neethi.version>2.0.4.wso2v3</org.apache.neethi.wso2.neethi.version>
-        <org.apache.ws.commons.schema.wso2.xmlschema.version>1.4.7.wso2v1
-        </org.apache.ws.commons.schema.wso2.xmlschema.version>
-        <org.apache.httpcomponents.httpcore.version>4.1</org.apache.httpcomponents.httpcore.version>
-        <org.apache.felix.maven.bundle.plugin.version>5.1.8</org.apache.felix.maven.bundle.plugin.version>
-        <org.apache.maven.plugin.api.version>3.8.7</org.apache.maven.plugin.api.version>
         <org.apache.commons.io.version>2.4</org.apache.commons.io.version>
         <org.apache.commons.logging.version>1.2</org.apache.commons.logging.version>
-        <org.apache.maven.war.plugins.version>2.1-beta-1</org.apache.maven.war.plugins.version>
+        <org.apache.felix.bundlerepository.version>1.6.2</org.apache.felix.bundlerepository.version>
+        <org.apache.felix.maven.bundle.plugin.version>5.1.8</org.apache.felix.maven.bundle.plugin.version>
+        <org.apache.felix.org.osgi.core.version>1.0.0</org.apache.felix.org.osgi.core.version>
+        <org.apache.felix.org.osgi.service.obr.version>1.0.1</org.apache.felix.org.osgi.service.obr.version>
+        <org.apache.geronimo.specs.wso2.geronimo.stax.api_1.0_spec.version>1.0.1.wso2v1</org.apache.geronimo.specs.wso2.geronimo.stax.api_1.0_spec.version>
+        <org.apache.httpcomponents.httpcore.version>4.1</org.apache.httpcomponents.httpcore.version>
+        <org.apache.maven.archiver.version>3.6.0</org.apache.maven.archiver.version>
+        <org.apache.maven.artifact.manager.version>2.2.1</org.apache.maven.artifact.manager.version>
+        <org.apache.maven.artifact.version>2.0.7</org.apache.maven.artifact.version>
+        <org.apache.maven.compat.version>3.8.7</org.apache.maven.compat.version>
+        <org.apache.maven.core.version>3.8.7</org.apache.maven.core.version>
+        <org.apache.maven.dependency.tree.version>3.2.1</org.apache.maven.dependency.tree.version>
+        <org.apache.maven.model.version>3.0.2</org.apache.maven.model.version>
+        <org.apache.maven.plugin.api.version>3.8.7</org.apache.maven.plugin.api.version>
+        <org.apache.maven.plugin.testing.harness.version>3.3.0</org.apache.maven.plugin.testing.harness.version>
+        <org.apache.maven.project.version>2.2.1</org.apache.maven.project.version>
         <org.apache.maven.scm.api.version>1.9.1</org.apache.maven.scm.api.version>
-        <org.apache.maven.scm.provider.svnexe.version>1.9.1</org.apache.maven.scm.provider.svnexe.version>
         <org.apache.maven.scm.provider.gitexe.version>1.9.1</org.apache.maven.scm.provider.gitexe.version>
         <org.apache.maven.scm.provider.svn.commons.version>1.9.1</org.apache.maven.scm.provider.svn.commons.version>
-        <tycho.version>0.26.0</tycho.version>
-        <junit.version>3.8.1</junit.version>
-        <maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
-        <plexus.container.default.version>1.5.4</plexus.container.default.version>
-        <plexus.archiver.version>1.0-alpha-7</plexus.archiver.version>
-        <plexus.utils.version>2.0.1</plexus.utils.version>
-        <plexus.interactivity.api.version>1.0-alpha-6</plexus.interactivity.api.version>
-        <plexus.sec.dispatcher.version>1.4</plexus.sec.dispatcher.version>
-        <plexus.cipher.version>1.7</plexus.cipher.version>
-        <bndlib.version>0.0.357</bndlib.version>
-        <kxml2.version>2.2.2</kxml2.version>
-        <mockito.core.version>1.9.5</mockito.core.version>
-        <log4j.version>1.2.14</log4j.version>
-        <wsdl4j.version>1.6.2.wso2v2</wsdl4j.version>
-        <feign.version>11.0</feign.version>
-        <feign-form.version>3.8.0</feign-form.version>
-        <org.wso2.json.version>3.0.0.wso2v1</org.wso2.json.version>
-        <commons.io.version>2.4.0.wso2v1</commons.io.version>
-        <org.wso2.securevault.version>1.0.0</org.wso2.securevault.version>
+        <org.apache.maven.scm.provider.svnexe.version>1.9.1</org.apache.maven.scm.provider.svnexe.version>
+        <org.apache.maven.settings.version>3.8.7</org.apache.maven.settings.version>
+        <org.apache.maven.wagon.provider.api.version>1.0-beta-2</org.apache.maven.wagon.provider.api.version>
+        <org.apache.maven.war.plugins.version>2.1-beta-1</org.apache.maven.war.plugins.version>
+        <org.apache.neethi.wso2.neethi.version>2.0.4.wso2v3</org.apache.neethi.wso2.neethi.version>
+        <org.apache.ws.commons.axiom.version>1.2.20</org.apache.ws.commons.axiom.version>
+        <org.apache.ws.commons.axiom.wso2.axiom.version>1.2.11.wso2v4</org.apache.ws.commons.axiom.wso2.axiom.version>
+        <org.apache.ws.commons.schema.wso2.xmlschema.version>1.4.7.wso2v1</org.apache.ws.commons.schema.wso2.xmlschema.version>
+        <org.osgi.core.version>6.0.0</org.osgi.core.version>
         <org.wso2.carbon.authenticator.stub.version>3.2.0</org.wso2.carbon.authenticator.stub.version>
         <org.wso2.carbon.roles.mgt.stub.version>3.2.0</org.wso2.carbon.roles.mgt.stub.version>
-        <org.wso2.maven.synapse.plugin.version>5.2.43-SNAPSHOT</org.wso2.maven.synapse.plugin.version>
-        <org.wso2.maven.stratos.plugin.version>2.1.0</org.wso2.maven.stratos.plugin.version>
+        <org.wso2.ciphertool.version>1.1.13</org.wso2.ciphertool.version>
+        <org.wso2.json.version>3.0.0.wso2v1</org.wso2.json.version>
         <org.wso2.maven.capp.version>5.2.43-SNAPSHOT</org.wso2.maven.capp.version>
         <org.wso2.maven.core.version>5.2.43-SNAPSHOT</org.wso2.maven.core.version>
         <org.wso2.maven.esb.version>2.1.0</org.wso2.maven.esb.version>
-        <org.wso2.maven.utils.version>5.2.43-SNAPSHOT</org.wso2.maven.utils.version>
         <org.wso2.maven.registry.version>5.2.43-SNAPSHOT</org.wso2.maven.registry.version>
+        <org.wso2.maven.stratos.plugin.version>2.1.0</org.wso2.maven.stratos.plugin.version>
+        <org.wso2.maven.synapse.plugin.version>5.2.43-SNAPSHOT</org.wso2.maven.synapse.plugin.version>
+        <org.wso2.maven.utils.version>5.2.43-SNAPSHOT</org.wso2.maven.utils.version>
+        <org.wso2.securevault.version>1.0.0</org.wso2.securevault.version>
+        <plexus.archiver.version>1.0-alpha-7</plexus.archiver.version>
+        <plexus.cipher.version>1.7</plexus.cipher.version>
+        <plexus.container.default.version>1.5.4</plexus.container.default.version>
+        <plexus.interactivity.api.version>1.0-alpha-6</plexus.interactivity.api.version>
+        <plexus.sec.dispatcher.version>1.4</plexus.sec.dispatcher.version>
+        <plexus.utils.version>2.0.1</plexus.utils.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <gson.version>2.8.5</gson.version>
+        <project.scm.id>my-scm-server</project.scm.id>
+        <sourceReleaseAssemblyDescriptor>source-release</sourceReleaseAssemblyDescriptor>
         <testng.version>6.11</testng.version>
-        <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-        <org.apache.ws.commons.axiom.version>1.2.20</org.apache.ws.commons.axiom.version>
-        <maven.spotbugsplugin.version>3.1.10</maven.spotbugsplugin.version>
-        <maven.checkstyle.plugin.version>3.0.0</maven.checkstyle.plugin.version>
-        <version.checkstyle>7.8.2</version.checkstyle>
-        <version.jinjava>2.4.14</version.jinjava>
+        <tycho.version>2.7.4</tycho.version>
         <version.cava-toml>0.5.0</version.cava-toml>
-        <orbit.version.commons.io>2.4.0.wso2v1</orbit.version.commons.io>
-        <common.logging.version>1.2</common.logging.version>
-        <orbit.version.commons.lang>2.6.0.wso2v1</orbit.version.commons.lang>
+        <version.checkstyle>7.8.2</version.checkstyle>
         <version.commons.codec>1.12</version.commons.codec>
-        <mi.config.mapper.version>1.0.7</mi.config.mapper.version>
-        <net.lingala.zip4j.version>1.3.2</net.lingala.zip4j.version>
-        <org.wso2.ciphertool.version>1.1.13</org.wso2.ciphertool.version>
+        <version.jinjava>2.4.14</version.jinjava>
+        <wsdl4j.version>1.6.2.wso2v2</wsdl4j.version>
+        <wso2.maven.compiler.source>11</wso2.maven.compiler.source>
+        <wso2.maven.compiler.target>11</wso2.maven.compiler.target>
     </properties>
 
 </project>

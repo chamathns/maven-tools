@@ -76,7 +76,10 @@ public class PublishProductMojo extends AbstractMojo {
     private ProductConfiguration productConfiguration;
 
 
-    /** @component */
+    /**
+	 * The launcher to use for launching the p2 application.
+	 *
+	 * @component */
     private P2ApplicationLauncher launcher;
 
     /**

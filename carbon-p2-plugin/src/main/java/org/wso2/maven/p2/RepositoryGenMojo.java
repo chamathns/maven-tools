@@ -161,7 +161,10 @@ public class RepositoryGenMojo extends AbstractMojo {
     private List remoteRepositories;
 
 
-    /** @component */
+    /**
+     * The launcher for the p2 application.
+     *
+     * @component */
     private P2ApplicationLauncher launcher;
 
     /**

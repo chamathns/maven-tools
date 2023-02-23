@@ -34,11 +34,17 @@
     <name>Maven P2 Profile Generation Plugin</name>
 
     <dependencies>
-        	<dependency>
+        <dependency>
 			<groupId>org.apache.maven</groupId>
 			<artifactId>maven-plugin-api</artifactId>
 			<version>${org.apache.maven.plugin.api.version}</version>
 		</dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugin-tools</groupId>
+            <artifactId>maven-plugin-annotations</artifactId>
+            <version>3.7.1</version>
+            <scope>provided</scope>
+        </dependency>
 		<dependency>
 			<groupId>org.apache.maven</groupId>
 			<artifactId>maven-core</artifactId>
@@ -69,12 +75,12 @@
 <!--            		<artifactId>maven-project</artifactId>-->
 <!--			<version>${org.apache.maven.project.version}</version>-->
 <!--        	</dependency>-->
-        	<dependency>
-            		<groupId>junit</groupId>
-            		<artifactId>junit</artifactId>
-			<version>${junit.version}</version>
-            		<scope>test</scope>
-        	</dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -104,6 +110,16 @@
                 </execution>
             </executions>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                </configuration>
+            </plugin>
+
 <!--            <plugin>-->
 <!--                <groupId>org.apache.maven.plugins</groupId>-->
 <!--                <artifactId>maven-plugin-plugin</artifactId>-->
@@ -125,37 +141,89 @@
 <!--                    </execution>-->
 <!--                </executions>-->
 <!--            </plugin>-->
-           <plugin>
-         <groupId>org.apache.rat</groupId>
-        <artifactId>apache-rat-plugin</artifactId>
-        <configuration>
-          <includes>
-            <include>src/**/*</include>
-            <include>pom.xml</include>
-          </includes>
-        <!--  <excludes>
-            <exclude>**/*/MANIFEST.MF</exclude>
-            <exclude>.git</exclude>
-            <exclude>.gitignore</exclude>
-            <exclude>.idea</exclude>
-            <exclude>*.iws</exclude>
-            <exclude>*.iml</exclude>
-            <exclude>*.ipr</exclude>
-            <exclude>**/META-INF/services/javax.json.spi.JsonProvider</exclude>
-            <exclude>**/*.json</exclude>
-            <exclude>**/*.yml</exclude>
-            <exclude>**/bench/*.txt</exclude>
-          </excludes>  -->
-        </configuration>
-        <executions>
-          <execution>
-            <phase>verify</phase>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
+            <plugin>
+             <groupId>org.apache.rat</groupId>
+            <artifactId>apache-rat-plugin</artifactId>
+            <configuration>
+              <includes>
+                <include>src/**/*</include>
+                <include>pom.xml</include>
+              </includes>
+            <!--  <excludes>
+                <exclude>**/*/MANIFEST.MF</exclude>
+                <exclude>.git</exclude>
+                <exclude>.gitignore</exclude>
+                <exclude>.idea</exclude>
+                <exclude>*.iws</exclude>
+                <exclude>*.iml</exclude>
+                <exclude>*.ipr</exclude>
+                <exclude>**/META-INF/services/javax.json.spi.JsonProvider</exclude>
+                <exclude>**/*.json</exclude>
+                <exclude>**/*.yml</exclude>
+                <exclude>**/bench/*.txt</exclude>
+              </excludes>  -->
+            </configuration>
+            <executions>
+              <execution>
+                <phase>verify</phase>
+                <goals>
+                  <goal>check</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-plugin-plugin</artifactId>-->
+<!--                <version>3.6.0</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>default-addPluginArtifactMetadata</id>-->
+<!--                        <phase>package</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>addPluginArtifactMetadata</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                    <execution>-->
+<!--                        <id>mojo-descriptor</id>-->
+<!--                        <phase>process-classes</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>descriptor</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                    <execution>-->
+<!--                        <id>help-descriptor</id>-->
+<!--                        <phase>process-classes</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>helpmojo</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--                <configuration>-->
+<!--                    <skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+
+            <plugin>
+                <groupId>org.apache.maven.plugin-tools</groupId>
+                <artifactId>maven-plugin-tools-java</artifactId>
+                <version>3.7.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugin-tools</groupId>
+                <artifactId>maven-plugin-tools</artifactId>
+                <version>3.7.1</version>
+            </plugin>
         </plugins>
     </build>
 </project>
